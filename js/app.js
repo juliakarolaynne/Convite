@@ -163,7 +163,7 @@ flores.forEach((flor, index) => {
         setTimeout(() => flor.classList.remove("found"), 700);
 
         if (floresEncontradas.size === 4 && mensagem) {
-            mensagem.textContent = "Você encontrou todos os encantos ✦ Agora descubra a história!";
+            mensagem.innerHTML = "Você encontrou todos os encantos ✦<br>Agora descubra a história!";
         }
     });
 });
@@ -237,7 +237,7 @@ const detalhesPresentes = {
     roupinhas: `<strong>Roupinhas</strong><p>Para acompanhar a Aysha em cada nova fase.</p><p><b>Tamanho:</b> a definir</p>`,
     calcados: `<strong>Calçados</strong><p>Uma opção para os primeiros passinhos e novas aventuras.</p><p><b>Tamanho:</b> a definir</p>`,
     brinquedos: `<strong>Brinquedos</strong><p>Brinquedos diversos para brincar, descobrir e imaginar.</p>`,
-    pix: `<strong>PIX</strong><p>Se preferir, essa também é uma sugestão de presente.</p><div class="pix-key">CHAVE PIX AQUI</div><button class="secondary-btn" id="copyPix">Copiar chave</button><small>Troque a chave acima antes de enviar o convite.</small>`
+    pix: `<strong>PIX</strong><p>Se preferir, essa também é uma sugestão de presente.</p><div class="pix-key">096.079.381-00</div><button class="secondary-btn" id="copyPix">Copiar chave</button><small>Troque a chave acima antes de enviar o convite.</small>`
 };
 
 giftOptions.forEach((option) => {
@@ -249,7 +249,7 @@ giftOptions.forEach((option) => {
         const copyPix = document.getElementById("copyPix");
         if (copyPix) {
             copyPix.addEventListener("click", async () => {
-                const chave = "CHAVE PIX AQUI";
+                const chave = "096.079.381-00";
                 try {
                     await navigator.clipboard.writeText(chave);
                     copyPix.textContent = "Chave copiada ✓";

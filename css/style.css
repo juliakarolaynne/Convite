@@ -497,18 +497,13 @@ p {
 .date-card small { display: block; margin-top: 17px; letter-spacing: 2px; }
 .calendar-btn { margin-top: 15px; }
 
-.map-art {
-    height: 165px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    background: linear-gradient(#cde3bd, #9cbb8e);
-    font-size: 31px;
+.map-card iframe {
+    width: 100%;
+    height: 220px;
+    border: 0;
+    border-radius: 18px;
+    pointer-events: none;
 }
-
-.map-card h3 { margin: 8px; font-size: 28px; }
 
 /* ==============================
    PRESENTES
