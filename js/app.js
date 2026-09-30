@@ -4,6 +4,9 @@
 
 const particleLayer = document.getElementById("particles");
 
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbwpP1Ws-i83tFxgzmZfCch__BPj4hjJ6h3RneW1qkFmXFTEA2N86D2Mxgn8HkbSVfqSyQ/exec";
+
 function soltarBorboletas(x, y, quantidade = 20) {
     if (!particleLayer) return;
 
@@ -295,34 +298,79 @@ if (mapsButton) {
 // CONFIRMAÇÃO DE PRESENÇA
 // ==============================
 
+// ==============================
+// CONFIRMAÇÃO DE PRESENÇA
+// ==============================
+
 const rsvpForm = document.getElementById("rsvpForm");
 
 if (rsvpForm) {
-    rsvpForm.addEventListener("submit", (event) => {
+
+    rsvpForm.addEventListener("submit", async (event) => {
+
         event.preventDefault();
 
         const nome = document.getElementById("name").value.trim();
         const convidados = document.getElementById("guests").value;
-        const resultado = document.getElementById("result");
+        const mensagem = document.getElementById("message").value.trim();
+
         const confirmation = document.getElementById("confirmationScreen");
         const confirmationText = document.getElementById("confirmationText");
+        const botao = rsvpForm.querySelector("button[type='submit']");
 
-        resultado.innerHTML = "";
-        rsvpForm.hidden = true;
+        // Evita clicar várias vezes
+        botao.disabled = true;
+        botao.textContent = "Enviando...";
 
-        if (confirmation) {
-            confirmation.hidden = false;
-            confirmationText.textContent = `Obrigada, ${nome}! Sua presença (${convidados}) foi confirmada. Esperamos você para celebrar esse dia especial com a Aysha. 💗`;
+        const dados = {
+            nome: nome,
+            convidados: convidados,
+            mensagem: mensagem
+        };
+
+        try {
+
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify(dados)
+            });
+
+            // Esconde o formulário
+            rsvpForm.hidden = true;
+
+            // Mostra confirmação
+            if (confirmation) {
+                confirmation.hidden = false;
+
+                confirmationText.textContent =
+                    `Obrigada, ${nome}! Sua presença (${convidados}) foi confirmada. Esperamos você para celebrar esse dia especial com a Aysha. 💗`;
+            }
+
+            // Animação das borboletas
+            soltarBorboletas(
+                window.innerWidth / 2,
+                window.innerHeight / 2,
+                12
+            );
+
+        } catch (erro) {
+
+            console.error("Erro ao enviar:", erro);
+
+            botao.disabled = false;
+            botao.textContent = "Confirmar ♡";
+
+            alert(
+                "Não foi possível enviar a confirmação. Tente novamente."
+            );
         }
 
-        soltarBorboletas(innerWidth / 2, innerHeight / 2, 20);
-
-        const telefone = "";
-        if (telefone) {
-            const mensagem = encodeURIComponent(`Olá! Confirmo minha presença no aniversário de 1 ano da Aysha. Nome: ${nome}. ${convidados}.`);
-            window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
-        }
     });
+
 }
 
 // ==============================
