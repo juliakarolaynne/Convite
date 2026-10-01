@@ -234,8 +234,8 @@ const giftOptions = document.querySelectorAll(".gift-option");
 const giftDetails = document.getElementById("giftDetails");
 
 const detalhesPresentes = {
-    roupinhas: `<strong>Roupinhas</strong><p>Para acompanhar a Aysha em cada nova fase.</p><p><b>Tamanho:</b> a definir</p>`,
-    calcados: `<strong>Calçados</strong><p>Uma opção para os primeiros passinhos e novas aventuras.</p><p><b>Tamanho:</b> a definir</p>`,
+    roupinhas: `<strong>Roupinhas</strong><p>Para acompanhar a Aysha em cada nova fase.</p><p><b>Tamanho:</b> 2 anos</p>`,
+    calcados: `<strong>Calçados</strong><p>Uma opção para os primeiros passinhos e novas aventuras.</p><p><b>Tamanho:</b> 20 </p>`,
     brinquedos: `<strong>Brinquedos</strong><p>Brinquedos diversos para brincar, descobrir e imaginar.</p>`,
     pix: `<strong>PIX</strong><p>Se preferir, essa também é uma sugestão de presente.</p><div class="pix-key">096.079.381-00</div><button class="secondary-btn" id="copyPix">Copiar chave</button><small>Troque a chave acima antes de enviar o convite.</small>`
 };
@@ -289,8 +289,7 @@ const mapsButton = document.getElementById("mapsBtn");
 if (mapsButton) {
     mapsButton.addEventListener("click", (event) => {
         event.preventDefault();
-        const endereco = encodeURIComponent("Rua das Flores, 123, Formosa - GO");
-        window.open(`https://www.google.com/maps/search/?api=1&query=${endereco}`, "_blank");
+        window.open("https://maps.app.goo.gl/Sz36jrz6rtR3nfdP9", "_blank");
     });
 }
 
